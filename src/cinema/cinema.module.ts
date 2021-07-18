@@ -4,7 +4,7 @@ import { CinemaController } from './cinema.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Cinema, CinemaSchema } from './schemas/cinema.schema';
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Cinema.name, schema: CinemaSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Cinema', schema: CinemaSchema }])],
   controllers: [CinemaController],
   providers: [CinemaService]
 })

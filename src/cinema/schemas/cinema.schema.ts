@@ -1,21 +1,17 @@
 
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema } from 'mongoose';
 import { Document } from 'mongoose';
 
+export const CinemaSchema = new Schema({
+    name: String,
+});
 
-@Schema()
-export class Cinema {
-    @Prop()
+/*for document creation with XXXModel.create(cinema:Cinema)*/
+export interface Cinema {
     name: string;
-
-    @Prop()
-    building: string;
-
-    address: string;
-
-    latitude
 }
 
-export type CinemaDocument = Cinema & Document;
+/**for query returned from database */
+export interface CinemaBaseDoc extends Cinema, Document {
 
-export const CinemaSchema = SchemaFactory.createForClass(Cinema);
+}

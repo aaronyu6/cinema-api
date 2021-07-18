@@ -3,14 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateCinemaDto } from './dto/create-cinema.dto';
 import { UpdateCinemaDto } from './dto/update-cinema.dto';
-import { Cinema, CinemaDocument } from './schemas/cinema.schema';
+import { Cinema, CinemaBaseDoc } from './schemas/cinema.schema';
 
 @Injectable()
 export class CinemaService {
-  constructor(@InjectModel(Cinema.name) private cinemaModel: Model<CinemaDocument>
+  constructor(@InjectModel('Cinema') private cinemaModel: Model<CinemaBaseDoc>
   ) { }
 
-  async create(createCinemaDto: CreateCinemaDto): Promise<Cinema> {
+  async create(createCinemaDto: CreateCinemaDto): Promise<CinemaBaseDoc> {
     return new this.cinemaModel(createCinemaDto).save();
   }
 
@@ -23,7 +23,7 @@ export class CinemaService {
     return await this.cinemaModel.findById(id);
   }
 
-  async findByName(filterName: string): Promise<Cinema[]> {
+  async findByName(filterName: string): Promise<CinemaBaseDoc[]> {
     //let wildCardName;
     //wildCardName = "/" + filterName + "/";
     //console.log(wildCardName);
