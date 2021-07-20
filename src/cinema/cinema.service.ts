@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateCinemaDto } from './dto/create-cinema.dto';
-import { UpdateCinemaDto } from './dto/update-cinema.dto';
-import { Cinema, CinemaBaseDoc } from './schemas/cinema.schema';
+import { CinemaBaseDoc, CreateCinemaDto, UpdateCinemaDto } from './schemas/cinema.schema';
 
 @Injectable()
 export class CinemaService {
@@ -32,8 +30,13 @@ export class CinemaService {
     return await this.cinemaModel.find({ name: { $regex: filterName } });
   }
 
-  async update(id: number, updateCinemaDto: UpdateCinemaDto) {
-    return `This action updates a #${id} cinema`;
+  async update(id: string, updateCinemaDto: UpdateCinemaDto): Promise<CinemaBaseDoc> {
+    const filter = { _id: id };
+    let doc = await this.cinemaModel.findOneAndUpdate(
+      filter, updateCinemaDto, {
+      new: true
+    });
+    return doc;
   }
 
   async remove(id: string) {
