@@ -13,7 +13,7 @@ import { CinemaModule } from './cinema/cinema.module';
       rootPath: join(__dirname, '..', 'public'),
     }),
     CinemaModule,
-    MongooseModule.forRoot('mongodb://localhost:27037/wmpcinemassl')
+    MongooseModule.forRoot('mongodb://localhost/wmpcinemassl')
   ],
   controllers: [AppController],
   providers: [AppService],
